@@ -21,4 +21,8 @@ public class LivroService {
 	public Livro cadastrar(Livro livro) {
 		return repository.save(livro);
 	}
+	
+	public void deletar(Long id) {
+	    repository.deleteById(id);
+	}
 }

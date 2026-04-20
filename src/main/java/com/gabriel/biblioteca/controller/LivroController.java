@@ -35,6 +35,7 @@ public class LivroController {
 	
 	@DeleteMapping("/livros/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id){
+		services.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
 	

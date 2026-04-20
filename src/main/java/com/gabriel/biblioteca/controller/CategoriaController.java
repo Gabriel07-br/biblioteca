@@ -23,7 +23,7 @@ public class CategoriaController {
 	
 	@GetMapping("/categorias/{id}")
 	public Categoria buscarPorId(@PathVariable Long id) {
-		Categoria categoria = services.BuscarPorId(id);
+		Categoria categoria = services.buscarPorId(id);
 		return categoria;
 	}
 	
@@ -35,6 +35,7 @@ public class CategoriaController {
 	
 	@DeleteMapping("/categorias/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id){
+		services.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
 	
