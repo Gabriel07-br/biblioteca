@@ -3,6 +3,8 @@ package com.gabriel.biblioteca.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Livro {
@@ -10,9 +12,13 @@ public class Livro {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@NotBlank(message = "Nome é Obrigatorio")
 	private String nome;
+	@NotBlank(message = "Autor é Obrigatorio")
 	private String autor;
+	@Min(1)
 	private double preco;
+	@Min(1401)
 	private int anoPublicacao;
 	
 	public Livro() {

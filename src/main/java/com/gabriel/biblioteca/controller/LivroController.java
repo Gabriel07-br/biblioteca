@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gabriel.biblioteca.model.Livro;
 import com.gabriel.biblioteca.service.LivroService;
 
+import jakarta.validation.Valid;
+
+
 @RestController
 public class LivroController {
 
@@ -28,7 +31,7 @@ public class LivroController {
 	}
 	
 	@PostMapping("/livros")
-	public ResponseEntity<Livro> cadastrar(@RequestBody Livro livro){
+	public ResponseEntity<Livro> cadastrar(@Valid @RequestBody Livro livro){
 		Livro livroCadastrado = services.cadastrar(livro);
 		return ResponseEntity.created(null).body(livroCadastrado);
 	}
