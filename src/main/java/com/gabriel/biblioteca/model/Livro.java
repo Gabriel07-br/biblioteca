@@ -1,8 +1,12 @@
 package com.gabriel.biblioteca.model;
 
+
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -20,8 +24,17 @@ public class Livro {
 	private double preco;
 	@Min(1401)
 	private int anoPublicacao;
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Categoria categoria;
 	public Livro() {
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Long getId() {

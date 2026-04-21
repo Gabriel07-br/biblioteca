@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gabriel.biblioteca.model.Categoria;
 import com.gabriel.biblioteca.service.CategoriaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class CategoriaController {
 
@@ -28,7 +30,7 @@ public class CategoriaController {
 	}
 	
 	@PostMapping("/categorias")
-	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria){
+	public ResponseEntity<Categoria> cadastrar(@Valid @RequestBody Categoria categoria){
 		Categoria categoriaCadastrada = services.cadastrar(categoria);
 		return ResponseEntity.created(null).body(categoriaCadastrada);
 	}
