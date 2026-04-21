@@ -42,7 +42,7 @@ public class CategoriaController {
 	}
 	
 	@PutMapping("categorias/{id}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria){
+	public ResponseEntity<Categoria> atualizar(@PathVariable Long id,@Valid @RequestBody Categoria categoria){
 		Categoria categoriaAtualizada = services.cadastrar(categoria);
 		return ResponseEntity.ok(categoriaAtualizada);
 	}

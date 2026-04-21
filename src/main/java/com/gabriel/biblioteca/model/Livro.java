@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Livro {
@@ -18,12 +19,14 @@ public class Livro {
 	private Long id;
 	@NotBlank(message = "Nome é Obrigatorio")
 	private String nome;
-	@NotBlank(message = "Autor é Obrigatorio")
-	private String autor;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull(message = "Autor é Obrigatorio")
+	private Autor autor;
 	@Min(1)
 	private double preco;
 	@Min(1401)
 	private int anoPublicacao;
+	@NotNull(message = "Categoria é obrigatorio")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Categoria categoria;
 	public Livro() {
@@ -53,11 +56,11 @@ public class Livro {
 		this.nome = nome;
 	}
 
-	public String getAutor() {
+	public Autor getAutor() {
 		return autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
 
