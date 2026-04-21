@@ -19,7 +19,7 @@ import com.gabriel.biblioteca.exception.LivroNaoEncontradoException;
 import com.gabriel.biblioteca.model.Livro;
 import com.gabriel.biblioteca.repository.LivroRepository;
 
-@ExtendWith(MockitoExtension.class)
+
 public class LivroServiceTest {
 	
 	@Mock
