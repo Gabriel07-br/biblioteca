@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gabriel.biblioteca.dto.LivroRequest;
+import com.gabriel.biblioteca.dto.LivroResponse;
 import com.gabriel.biblioteca.model.Livro;
 import com.gabriel.biblioteca.service.LivroService;
 
@@ -25,15 +27,16 @@ public class LivroController {
 	}
 	
 	@GetMapping("/livros/{id}")
-	public Livro buscarPorId(@PathVariable Long id) {
+	public LivroResponse buscarPorId(@PathVariable Long id) {
 		Livro livro = services.buscarLivrosPorId(id);
-		return livro;
+		
+		return LivroResponse.fromEntity(livro);
 	}
 	
 	@PostMapping("/livros")
-	public ResponseEntity<Livro> cadastrar(@Valid @RequestBody Livro livro){
+	public ResponseEntity<LivroResponse> cadastrar(@Valid @RequestBody LivroRequest livro){
 		Livro livroCadastrado = services.cadastrar(livro);
-		return ResponseEntity.created(null).body(livroCadastrado);
+		return ResponseEntity.created(null).body(LivroResponse.fromEntity(livroCadastrado));
 	}
 	
 	@DeleteMapping("/livros/{id}")
@@ -43,10 +46,9 @@ public class LivroController {
 	}
 	
 	@PutMapping("/livros/{id}")
-	public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livro){
+	public ResponseEntity<LivroResponse> atualizar(@PathVariable Long id, @RequestBody LivroRequest livro){
 		Livro livroAtualizado = services.cadastrar(livro);
-		return ResponseEntity.ok(livroAtualizado);
-		
+		return ResponseEntity.ok(LivroResponse.fromEntity(livroAtualizado));
 	}
 	
 }
