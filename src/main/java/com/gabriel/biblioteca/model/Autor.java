@@ -3,10 +3,12 @@ package com.gabriel.biblioteca.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "Autor")
 public class Autor {
 	@Id
 	@GeneratedValue
