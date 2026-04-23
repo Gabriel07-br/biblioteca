@@ -2,6 +2,7 @@ package com.gabriel.biblioteca.service;
 
 import org.springframework.stereotype.Service;
 
+import com.gabriel.biblioteca.dto.CategoriaRequest;
 import com.gabriel.biblioteca.exception.CategoriaNaoEncontradaException;
 import com.gabriel.biblioteca.model.Categoria;
 import com.gabriel.biblioteca.repository.CategoriaRepository;
@@ -18,7 +19,8 @@ public class CategoriaService {
 		return repository.findById(id).orElseThrow(() -> new CategoriaNaoEncontradaException(id));
 	}
 	
-	public Categoria cadastrar(Categoria categoria) {
+	public Categoria cadastrar(CategoriaRequest request) {
+		Categoria categoria = request.toEntity();
 		return repository.save(categoria);
 	}
 	public void deletar(Long id) {

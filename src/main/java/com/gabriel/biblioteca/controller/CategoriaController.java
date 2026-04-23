@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gabriel.biblioteca.dto.CategoriaRequest;
+import com.gabriel.biblioteca.dto.CategoriaResponse;
 import com.gabriel.biblioteca.model.Categoria;
 import com.gabriel.biblioteca.service.CategoriaService;
 
@@ -24,15 +26,15 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/categorias/{id}")
-	public Categoria buscarPorId(@PathVariable Long id) {
+	public CategoriaResponse buscarPorId(@PathVariable Long id) {
 		Categoria categoria = services.buscarPorId(id);
-		return categoria;
+		return CategoriaResponse.fromEntity(categoria);
 	}
 	
 	@PostMapping("/categorias")
-	public ResponseEntity<Categoria> cadastrar(@Valid @RequestBody Categoria categoria){
+	public ResponseEntity<CategoriaResponse> cadastrar(@Valid @RequestBody CategoriaRequest categoria){
 		Categoria categoriaCadastrada = services.cadastrar(categoria);
-		return ResponseEntity.created(null).body(categoriaCadastrada);
+		return ResponseEntity.created(null).body(CategoriaResponse.fromEntity(categoriaCadastrada));
 	}
 	
 	@DeleteMapping("/categorias/{id}")
@@ -42,9 +44,9 @@ public class CategoriaController {
 	}
 	
 	@PutMapping("categorias/{id}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long id,@Valid @RequestBody Categoria categoria){
+	public ResponseEntity<CategoriaResponse> atualizar(@PathVariable Long id,@Valid @RequestBody CategoriaRequest categoria){
 		Categoria categoriaAtualizada = services.cadastrar(categoria);
-		return ResponseEntity.ok(categoriaAtualizada);
+		return ResponseEntity.ok(CategoriaResponse.fromEntity(categoriaAtualizada));
 	}
 }
 

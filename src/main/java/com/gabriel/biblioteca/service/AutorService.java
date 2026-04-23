@@ -2,6 +2,7 @@ package com.gabriel.biblioteca.service;
 
 import org.springframework.stereotype.Service;
 
+import com.gabriel.biblioteca.dto.AutorRequest;
 import com.gabriel.biblioteca.exception.AutorNaoEncontradoException;
 import com.gabriel.biblioteca.model.Autor;
 import com.gabriel.biblioteca.repository.AutorRepository;
@@ -19,7 +20,8 @@ public class AutorService {
 		return repository.findById(id).orElseThrow(() -> new AutorNaoEncontradoException(id));
 	}
 	
-	public Autor cadastrar(Autor autor) {
+	public Autor cadastrar(AutorRequest request) {
+		Autor autor = request.toEntity();
 		return repository.save(autor);
 	}
 	

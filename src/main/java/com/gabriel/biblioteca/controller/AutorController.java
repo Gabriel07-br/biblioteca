@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gabriel.biblioteca.dto.AutorRequest;
+import com.gabriel.biblioteca.dto.AutorResponse;
 import com.gabriel.biblioteca.model.Autor;
 import com.gabriel.biblioteca.service.AutorService;
 
@@ -17,28 +19,28 @@ import jakarta.validation.Valid;
 @RestController
 public class AutorController {
 	
-	private AutorService service;
+	private final AutorService service;
 	
 	public AutorController(AutorService service) {
 		this.service = service;
 	}
 	
 	@GetMapping("/autores/{id}")
-	public Autor buscarPorId(@PathVariable Long id) {
+	public AutorResponse buscarPorId(@PathVariable Long id) {
 		Autor autor = service.buscarPorId(id);
-		return autor;
+		return AutorResponse.fromEntity(autor);
 	}
 	
 	@PostMapping("/autores")
-	public ResponseEntity<Autor> cadastrar(@Valid @RequestBody Autor autor){
+	public ResponseEntity<AutorResponse> cadastrar(@Valid @RequestBody AutorRequest autor){
 		Autor autorCadastrado = service.cadastrar(autor);
-		return ResponseEntity.created(null).body(autorCadastrado);
+		return ResponseEntity.created(null).body(AutorResponse.fromEntity(autorCadastrado));
 	}
 	
 	@PutMapping("/autores/{id}")
-	public ResponseEntity<Autor> atualizar(@PathVariable Long id, @Valid @RequestBody Autor autor){
+	public ResponseEntity<AutorResponse> atualizar(@PathVariable Long id, @Valid @RequestBody AutorRequest autor){
 		Autor autorAtualizado = service.cadastrar(autor);
-		return ResponseEntity.ok(autorAtualizado);
+		return ResponseEntity.ok(AutorResponse.fromEntity(autorAtualizado));
 	}
 	
 	@DeleteMapping("/autores/{id}")
