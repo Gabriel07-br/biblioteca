@@ -1,6 +1,9 @@
 package com.gabriel.biblioteca.dto;
 
+import java.util.List;
+
 import com.gabriel.biblioteca.model.Autor;
+import com.gabriel.biblioteca.model.Livro;
 
 public class AutorResponse {
 	
@@ -8,6 +11,7 @@ public class AutorResponse {
 	private String nome;
 	private String nacionalidade;
 	private int anoNascimento;
+	private List<String> titulosLivros;
 	
 	public static AutorResponse fromEntity(Autor autor) {
 		AutorResponse autorResponse = new AutorResponse();
@@ -15,7 +19,18 @@ public class AutorResponse {
 		autorResponse.setNome(autor.getNome());
 		autorResponse.setNacionalidade(autor.getNacionalidade());
 		autorResponse.setAnoNascimento(autor.getAnoNascimento());
+		autorResponse.setTitulosLivros(autor.getLivros() != null 
+			    ? autor.getLivros().stream().map(Livro::getNome).toList() 
+			    	    : List.of());
 		return autorResponse;
+	}
+
+	public List<String> getTitulosLivros() {
+		return titulosLivros;
+	}
+
+	public void setTitulosLivros(List<String> titulosLivros) {
+		this.titulosLivros = titulosLivros;
 	}
 
 	public Long getId() {

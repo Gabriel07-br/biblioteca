@@ -15,7 +15,10 @@ public class CategoriaResponse {
 		CategoriaResponse categoriaResponse = new CategoriaResponse();
 		categoriaResponse.setId(categoria.getId());
 		categoriaResponse.setNome(categoria.getNome());
-		categoriaResponse.setLivros(categoria.getLivros().stream().map(Livro::getNome).toList());
+		categoriaResponse.setLivros(categoria.getLivros() != null 
+			    ? categoria.getLivros().stream().map(Livro::getNome).toList() 
+			    	    : List.of()
+);
 		return categoriaResponse;
 	}
 	
