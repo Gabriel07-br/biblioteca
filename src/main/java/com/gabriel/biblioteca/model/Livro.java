@@ -2,10 +2,13 @@ package com.gabriel.biblioteca.model;
 
 
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -21,9 +24,8 @@ public class Livro {
 	private Long id;
 	@NotBlank(message = "Nome é Obrigatorio")
 	private String nome;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@NotNull(message = "Autor é Obrigatorio")
-	private Autor autor;
+	@ManyToMany
+	private List<Autor> autores;
 	@Min(1)
 	private double preco;
 	@Min(1401)
@@ -58,12 +60,14 @@ public class Livro {
 		this.nome = nome;
 	}
 
-	public Autor getAutor() {
-		return autor;
+	
+
+	public List<Autor> getAutores() {
+		return autores;
 	}
 
-	public void setAutor(Autor autor) {
-		this.autor = autor;
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
 	}
 
 	public double getPreco() {

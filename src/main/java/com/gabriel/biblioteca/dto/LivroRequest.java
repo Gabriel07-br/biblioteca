@@ -1,8 +1,10 @@
 package com.gabriel.biblioteca.dto;
 
+import java.util.List;
+
 import com.gabriel.biblioteca.model.Livro;
 
-public record LivroRequest(String nome, double preco, int anoPublicacao, Long autorId, Long categoriaId) {
+public record LivroRequest(String nome, double preco, int anoPublicacao, List<Long> autoresIds, Long categoriaId) {
 
 	public Livro toEntity() {
 		Livro livro = new Livro();

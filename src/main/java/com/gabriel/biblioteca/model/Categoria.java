@@ -1,8 +1,11 @@
 package com.gabriel.biblioteca.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -14,7 +17,13 @@ public class Categoria {
 	private Long id;
 	@NotBlank(message = "Nome é obrigatorio")
 	private String nome;
+	@OneToMany(mappedBy = "categoria")
+	private List<Livro> livros;
 	
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
 	public Categoria() {
 	}
 

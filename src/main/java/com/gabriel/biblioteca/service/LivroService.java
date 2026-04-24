@@ -27,7 +27,7 @@ public class LivroService {
 	
 	public Livro cadastrar(LivroRequest request) {
 		Livro livro = request.toEntity();
-		livro.setAutor(aRepository.findById(request.autorId()).orElseThrow());
+		livro.setAutores(request.autoresIds().stream().map(id -> aRepository.findById(id).orElseThrow()).toList());
 		livro.setCategoria(cRepository.findById(request.categoriaId()).orElseThrow());
 		return repository.save(livro);
 	}

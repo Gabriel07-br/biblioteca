@@ -1,12 +1,15 @@
 package com.gabriel.biblioteca.dto;
 
+import java.util.List;
+
+import com.gabriel.biblioteca.model.Autor;
 import com.gabriel.biblioteca.model.Livro;
 
 public class LivroResponse {
 	
 	private Long id;
 	private String nome;
-	private String nomeAutor;
+	private List<String> nomesAutores;
 	private String nomeCategoria;
 	private double preco;
 	private int anoPublicacao;
@@ -17,7 +20,7 @@ public class LivroResponse {
 		response.setNome(livro.getNome());
 		response.setPreco(livro.getPreco());
 		response.setAnoPublicacao(livro.getAnoPublicacao());
-		response.setNomeAutor(livro.getAutor().getNome());
+		response.setNomesAutores(livro.getAutores().stream().map(Autor::getNome).toList());
 		response.setNomeCategoria(livro.getCategoria().getNome());
 		return response;
 	}
@@ -34,12 +37,15 @@ public class LivroResponse {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getNomeAutor() {
-		return nomeAutor;
+
+	public List<String> getNomesAutores() {
+		return nomesAutores;
 	}
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
+
+	public void setNomesAutores(List<String> nomesAutores) {
+		this.nomesAutores = nomesAutores;
 	}
+
 	public String getNomeCategoria() {
 		return nomeCategoria;
 	}
